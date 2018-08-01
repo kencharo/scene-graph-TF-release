@@ -23,11 +23,12 @@ Here we provide an instruction on how to compile the `roi_pooling` op specifical
 3. Run the following command to compile a GPU-capable RoI-Pooling layer
 
 ```
-TF_INC=$(python -c 'import tensorflow as tf; print(tf.sysconfig.get_include())')
+export TF_INC=$(python -c 'import tensorflow as tf; print(tf.sysconfig.get_include())')
+export TF_LIB=$(python -c 'import tensorflow as tf; print(tf.sysconfig.get_lib())')
 nvcc -std=c++11 -c -o roi_pooling_op_gpu.cu.o roi_pooling_op_gpu.cu.cc -I \
-    $TF_INC -D GOOGLE_CUDA=1 -x cu -Xcompiler -fPIC
+    $TF_INC -D GOOGLE_CUDA=1 -x cu -Xcompiler -fPIC -L$TF_LIB -ltensorflow_framework
 g++ -std=c++11 -shared -o roi_pooling_op_gpu.so roi_pooling_op.cc \
-    roi_pooling_op_gpu.cu.o -I $TF_INC -fPIC -lcudart
+    roi_pooling_op_gpu.cu.o -I $TF_INC -fPIC -lcudart -L$TF_LIB -ltensorflow_framework -D_GLIBCXX_USE_CXX11_ABI=0
 ```
 
 Note that if your CUDA is not installed in the default location, you have to specify the path by adding a `-L YOUR_CUDA_PATH/lib64/` flag in the last command.
