@@ -30,7 +30,7 @@ However, if you just want to test/visualize some sample predictions, you may dow
 ## Dependencies
 To get started with the framework, install the following dependencies:
 - Python 2.7
-- [TensorFlow r0.11](https://www.tensorflow.org/versions/r0.11/get_started/os_setup#download-and-setup)
+- [TensorFlow 1.9.0](https://www.tensorflow.org/install/)
 - [h5py](http://www.h5py.org/)
 - [numpy](http://www.numpy.org/)
 - [matplotlib](http://matplotlib.org/)
