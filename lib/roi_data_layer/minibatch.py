@@ -24,7 +24,7 @@ def get_minibatch(roidb, num_classes):
         'num_images ({}) must divide BATCH_SIZE ({})'. \
         format(num_images, cfg.TRAIN.BATCH_SIZE)
     rois_per_image = cfg.TRAIN.BATCH_SIZE / num_images
-    fg_rois_per_image = np.round(cfg.TRAIN.FG_FRACTION * rois_per_image)
+    fg_rois_per_image = int(np.round(cfg.TRAIN.FG_FRACTION * rois_per_image))
 
     im_timer = Timer()
     im_timer.tic()

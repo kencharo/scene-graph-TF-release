@@ -6,8 +6,8 @@ def exp_average_summary(ops, dep_ops, decay=0.9, name='avg', scope_pfix='',
     averages_op = averages.apply(ops)
 
     for op in ops:
-        tf.scalar_summary(scope_pfix + op.name + raw_pfix, op)
-        tf.scalar_summary(scope_pfix + op.name + avg_pfix,
+        tf.summary.scalar(scope_pfix + op.name + raw_pfix, op)
+        tf.summary.scalar(scope_pfix + op.name + avg_pfix,
                           averages.average(op))
 
     with tf.control_dependencies([averages_op]):
